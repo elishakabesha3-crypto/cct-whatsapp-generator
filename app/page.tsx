@@ -1,9 +1,8 @@
 export default function Home() {
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
-      <h1 className="text-4xl font-bold text-blue-900">
-        CCT WhatsApp Generator 🚀
-      </h1>
-    </div>
-  )
+    <main>
+      <h1>Hello Albert 👋</h1>
+      <p>Your Next.js site is working!</p>
+    </main>
+  );
 }
