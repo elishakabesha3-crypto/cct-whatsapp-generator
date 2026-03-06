@@ -1,15 +1,26 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { generateITMessage } from "@/lib/messageFormatter";
 
 export default function ITIssuesForm() {
   const [issue, setIssue] = useState("");
   const [assignedTo, setAssignedTo] = useState("");
   const [engineerList, setEngineerList] = useState<string[]>([]);
+  const [preview, setPreview] = useState("");
 
   useEffect(() => {
     setEngineerList(JSON.parse(localStorage.getItem("engineerList") || "[]"));
   }, []);
+
+  // Update preview when fields change
+  useEffect(() => {
+    if (issue && assignedTo) {
+      setPreview(generateITMessage(issue, assignedTo));
+    } else {
+      setPreview("");
+    }
+  }, [issue, assignedTo]);
 
   const addEngineer = (newEng: string) => {
     if (!newEng.trim()) return;
@@ -20,7 +31,7 @@ export default function ITIssuesForm() {
 
   const generateMessage = () => {
     if (!issue || !assignedTo) { alert("Fill all fields!"); return; }
-    const msg = `I.T Issue Report:\n\nIssue: ${issue}\nAssigned to: ${assignedTo}`;
+    const msg = generateITMessage(issue, assignedTo);
     const saved = localStorage.getItem("sentMessages");
     const messages = saved ? JSON.parse(saved) : [];
     messages.unshift(msg);
@@ -47,13 +58,21 @@ export default function ITIssuesForm() {
           }}>Add</button>
       </div>
 
-      <button className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 w-full" onClick={generateMessage}>
+      {/* Message Preview */}
+      {preview && (
+        <div className="bg-gray-100 p-4 rounded border-l-4 border-purple-600 space-y-2">
+          <p className="text-sm font-semibold text-gray-600">Message Preview:</p>
+          <p className="text-sm whitespace-pre-wrap text-gray-800">{preview}</p>
+        </div>
+      )}
+
+      <button className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 w-full font-medium" onClick={generateMessage}>
         Generate Message
       </button>
 
-      {issue && assignedTo && (
-        <a className="inline-block mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 w-full text-center"
-          href={`https://wa.me/?text=${encodeURIComponent(`I.T Issue Report:\n\nIssue: ${issue}\nAssigned to: ${assignedTo}`)}`} target="_blank">
+      {preview && (
+        <a className="inline-block mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 w-full text-center font-medium"
+          href={`https://wa.me/?text=${encodeURIComponent(preview)}`} target="_blank">
           Send to WhatsApp
         </a>
       )}

@@ -25,11 +25,14 @@ export default function History() {
       {messages.length === 0 ? (
         <p className="text-gray-500">No messages sent yet...</p>
       ) : (
-        <ul className="list-disc pl-5 space-y-2 max-h-96 overflow-y-auto">
+        <div className="space-y-4 max-h-96 overflow-y-auto">
           {messages.map((msg, i) => (
-            <li key={i} className="border-b pb-1">{msg}</li>
+            <div key={i} className="bg-gray-50 border-l-4 border-green-600 p-4 rounded">
+              <p className="text-xs text-gray-600 mb-2">Message {messages.length - i}</p>
+              <p className="text-sm whitespace-pre-wrap text-gray-800">{msg}</p>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );

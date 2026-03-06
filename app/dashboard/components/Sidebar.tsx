@@ -10,17 +10,31 @@ export default function Sidebar({ setTab }: SidebarProps) {
       <h1 className="text-2xl font-bold mb-10">CCT Dashboard</h1>
 
       <button
-        className="mb-4 bg-yellow-500 text-black py-2 px-4 rounded hover:bg-yellow-400 transition"
+        className="mb-4 bg-yellow-500 text-black py-2 px-4 rounded hover:bg-yellow-400 transition font-medium"
         onClick={() => setTab("atm")}
       >
-        Generate ATM Report
+        🏧 Generate ATM Report
       </button>
 
       <button
-        className="mb-4 bg-yellow-500 text-black py-2 px-4 rounded hover:bg-yellow-400 transition"
+        className="mb-4 bg-orange-500 text-black py-2 px-4 rounded hover:bg-orange-400 transition font-medium"
+        onClick={() => setTab("it")}
+      >
+        🖥️ Report I.T Issue
+      </button>
+
+      <button
+        className="mb-4 bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition font-medium"
+        onClick={() => setTab("firstline")}
+      >
+        📞 First Line Call
+      </button>
+
+      <button
+        className="mb-4 bg-yellow-500 text-black py-2 px-4 rounded hover:bg-yellow-400 transition font-medium"
         onClick={() => setTab("manual")}
       >
-        Manual Message
+        ✉️ Manual Message
       </button>
 
       <button
