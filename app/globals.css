@@ -21,11 +21,6 @@
     --success: #10b981;
     --warning: #f59e0b;
     --info: #3b82f6;
-    
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
-    --gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    --gradient-accent: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
   }
 
   body {
@@ -36,12 +31,10 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Smooth scrolling */
   html {
     scroll-behavior: smooth;
   }
 
-  /* Selection styling */
   ::selection {
     background-color: var(--primary);
     color: white;
@@ -49,7 +42,6 @@
 }
 
 @layer components {
-  /* Glass morphism effect */
   .glass {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(20px);
@@ -57,85 +49,156 @@
     border-radius: 0.5rem;
   }
 
-  /* Smooth transitions */
   .transition-smooth {
-    @apply transition-all duration-300;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Button base styles with animations */
   .btn-base {
-    @apply px-4 py-2 rounded-lg font-medium transition-smooth cursor-pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .btn-primary {
-    @apply btn-base bg-blue-600 text-white hover:bg-blue-700 active:scale-95 shadow-lg hover:shadow-blue-500/50;
+    background-color: rgb(37, 99, 235);
+    color: white;
+    box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
+  }
+
+  .btn-primary:hover {
+    background-color: rgb(29, 78, 216);
+    box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.3);
+  }
+
+  .btn-primary:active {
+    transform: scale(0.95);
   }
 
   .btn-secondary {
-    @apply btn-base bg-slate-700 text-white hover:bg-slate-600 active:scale-95;
+    background-color: rgb(51, 65, 85);
+    color: white;
+  }
+
+  .btn-secondary:hover {
+    background-color: rgb(30, 41, 59);
+  }
+
+  .btn-secondary:active {
+    transform: scale(0.95);
   }
 
   .btn-success {
-    @apply btn-base bg-emerald-600 text-white hover:bg-emerald-700 active:scale-95 shadow-lg hover:shadow-emerald-500/50;
+    background-color: rgb(5, 150, 105);
+    color: white;
+    box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3);
+  }
+
+  .btn-success:hover {
+    background-color: rgb(4, 120, 87);
+    box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.3);
+  }
+
+  .btn-success:active {
+    transform: scale(0.95);
   }
 
   .btn-ghost {
-    @apply btn-base bg-transparent hover:bg-white/10 text-white;
+    background-color: transparent;
+    color: white;
   }
 
-  /* Card animations */
+  .btn-ghost:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
   .card-hover {
-    @apply transition-smooth hover:shadow-2xl hover:shadow-blue-500/20 hover:-translate-y-1;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Fade in animation */
+  .card-hover:hover {
+    box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.2);
+    transform: translateY(-4px);
+  }
+
   .fade-in {
     animation: fadeIn 0.5s ease-out;
   }
 
-  /* Slide in from right */
   .slide-in {
     animation: slideInRight 0.4s ease-out;
   }
 
-  /* Pulse animation for active states */
   .pulse-soft {
     animation: pulse-soft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 
-  /* Input styling */
-  input, textarea, select {
-    @apply bg-slate-800/50 border border-slate-700 text-white placeholder-slate-500 rounded-lg px-3 py-2 transition-smooth focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20;
+  input,
+  textarea,
+  select {
+    background-color: rgba(30, 41, 59, 0.5);
+    border: 1px solid rgb(71, 85, 105);
+    color: white;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Badge styling */
+  input::placeholder,
+  textarea::placeholder,
+  select::placeholder {
+    color: rgb(100, 116, 139);
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    border-color: rgb(59, 130, 246);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+  }
+
   .badge {
-    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
   }
 
   .badge-primary {
-    @apply badge bg-blue-500/20 text-blue-300 border border-blue-500/30;
+    background-color: rgba(59, 130, 246, 0.2);
+    color: rgb(147, 197, 253);
+    border: 1px solid rgba(59, 130, 246, 0.3);
   }
 
   .badge-success {
-    @apply badge bg-emerald-500/20 text-emerald-300 border border-emerald-500/30;
+    background-color: rgba(16, 185, 129, 0.2);
+    color: rgb(110, 231, 183);
+    border: 1px solid rgba(16, 185, 129, 0.3);
   }
 
   .badge-warning {
-    @apply badge bg-amber-500/20 text-amber-300 border border-amber-500/30;
+    background-color: rgba(245, 158, 11, 0.2);
+    color: rgb(253, 224, 71);
+    border: 1px solid rgba(245, 158, 11, 0.3);
   }
 
   .badge-destructive {
-    @apply badge bg-red-500/20 text-red-300 border border-red-500/30;
+    background-color: rgba(239, 68, 68, 0.2);
+    color: rgb(248, 113, 113);
+    border: 1px solid rgba(239, 68, 68, 0.3);
   }
 
-  /* Section divider */
   .divider {
-    @apply h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgb(71, 85, 105), transparent);
   }
 }
 
-/* Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
