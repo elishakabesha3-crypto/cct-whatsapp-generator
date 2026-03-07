@@ -1,3 +1,251 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    /* Professional dark theme colors */
+    --background: #0f0f12;
+    --foreground: #ffffff;
+    --card: #1a1a1f;
+    --card-foreground: #ffffff;
+    --primary: #3b82f6;
+    --primary-dark: #1e40af;
+    --accent: #10b981;
+    --accent-light: #34d399;
+    --destructive: #ef4444;
+    --border: #2d2d35;
+    --input: #1a1a1f;
+    --muted: #6b7280;
+    --muted-foreground: #9ca3af;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --info: #3b82f6;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: white;
+  }
+}
+
+@layer components {
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+  }
+
+  .transition-smooth {
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-base {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-primary {
+    background-color: rgb(37, 99, 235);
+    color: white;
+    box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
+  }
+
+  .btn-primary:hover {
+    background-color: rgb(29, 78, 216);
+    box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.3);
+  }
+
+  .btn-primary:active {
+    transform: scale(0.95);
+  }
+
+  .btn-secondary {
+    background-color: rgb(51, 65, 85);
+    color: white;
+  }
+
+  .btn-secondary:hover {
+    background-color: rgb(30, 41, 59);
+  }
+
+  .btn-secondary:active {
+    transform: scale(0.95);
+  }
+
+  .btn-success {
+    background-color: rgb(5, 150, 105);
+    color: white;
+    box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3);
+  }
+
+  .btn-success:hover {
+    background-color: rgb(4, 120, 87);
+    box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.3);
+  }
+
+  .btn-success:active {
+    transform: scale(0.95);
+  }
+
+  .btn-ghost {
+    background-color: transparent;
+    color: white;
+  }
+
+  .btn-ghost:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .card-hover {
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-hover:hover {
+    box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.2);
+    transform: translateY(-4px);
+  }
+
+  .fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+
+  .slide-in {
+    animation: slideInRight 0.4s ease-out;
+  }
+
+  .pulse-soft {
+    animation: pulse-soft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  input,
+  textarea,
+  select {
+    background-color: rgba(30, 41, 59, 0.5);
+    border: 1px solid rgb(71, 85, 105);
+    color: white;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  input::placeholder,
+  textarea::placeholder,
+  select::placeholder {
+    color: rgb(100, 116, 139);
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    border-color: rgb(59, 130, 246);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  .badge-primary {
+    background-color: rgba(59, 130, 246, 0.2);
+    color: rgb(147, 197, 253);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+  }
+
+  .badge-success {
+    background-color: rgba(16, 185, 129, 0.2);
+    color: rgb(110, 231, 183);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+  }
+
+  .badge-warning {
+    background-color: rgba(245, 158, 11, 0.2);
+    color: rgb(253, 224, 71);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+  }
+
+  .badge-destructive {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: rgb(248, 113, 113);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+  }
+
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgb(71, 85, 105), transparent);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.shimmer {
+  animation: shimmer 2s infinite;
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+  background-size: 1000px 100%;
+}

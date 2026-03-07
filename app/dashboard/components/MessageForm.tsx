@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { generateATMMessage } from "@/lib/messageFormatter";
 
 export default function MessageForm() {
   const [atm, setAtm] = useState("");
@@ -10,6 +11,7 @@ export default function MessageForm() {
   const [atmList, setAtmList] = useState<string[]>([]);
   const [locationList, setLocationList] = useState<string[]>([]);
   const [engineerList, setEngineerList] = useState<string[]>([]);
+  const [preview, setPreview] = useState("");
 
   // Load saved data from localStorage
   useEffect(() => {
@@ -17,6 +19,15 @@ export default function MessageForm() {
     setLocationList(JSON.parse(localStorage.getItem("locationList") || "[]"));
     setEngineerList(JSON.parse(localStorage.getItem("engineerList") || "[]"));
   }, []);
+
+  // Update preview when fields change
+  useEffect(() => {
+    if (atm && time && location && assignedTo) {
+      setPreview(generateATMMessage(atm, location, time, assignedTo));
+    } else {
+      setPreview("");
+    }
+  }, [atm, time, location, assignedTo]);
 
   const addATM = (newATM: string) => {
     if (!newATM.trim()) return;
@@ -45,7 +56,7 @@ export default function MessageForm() {
       return;
     }
 
-    const msg = `ATM Report:\nATM: ${atm}\nLocation: ${location}\nTime: ${time}\nAssigned to: ${assignedTo}`;
+    const msg = generateATMMessage(atm, location, time, assignedTo);
     const saved = localStorage.getItem("sentMessages");
     const messages = saved ? JSON.parse(saved) : [];
     messages.unshift(msg);
@@ -111,15 +122,23 @@ export default function MessageForm() {
         >Add</button>
       </div>
 
+      {/* Message Preview */}
+      {preview && (
+        <div className="bg-gray-100 p-4 rounded border-l-4 border-yellow-600 space-y-2">
+          <p className="text-sm font-semibold text-gray-600">Message Preview:</p>
+          <p className="text-sm whitespace-pre-wrap text-gray-800">{preview}</p>
+        </div>
+      )}
+
       <button
-        className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 w-full"
+        className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 w-full font-medium"
         onClick={generateMessage}
       >Generate Message</button>
 
-      {atm && time && location && assignedTo && (
+      {preview && (
         <a
-          className="inline-block mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 w-full text-center"
-          href={`https://wa.me/?text=${encodeURIComponent(`ATM Report:\nATM: ${atm}\nLocation: ${location}\nTime: ${time}\nAssigned to: ${assignedTo}`)}`}
+          className="inline-block mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 w-full text-center font-medium"
+          href={`https://wa.me/?text=${encodeURIComponent(preview)}`}
           target="_blank"
         >
           Send to WhatsApp
