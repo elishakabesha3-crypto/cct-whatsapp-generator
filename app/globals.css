@@ -59,7 +59,7 @@
 
   /* Smooth transitions */
   .transition-smooth {
-    @apply transition-all duration-300 ease-out;
+    @apply transition-all duration-300;
   }
 
   /* Button base styles with animations */
